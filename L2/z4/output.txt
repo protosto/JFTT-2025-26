@@ -1,0 +1,4 @@
+Błąd: za mała liczba argumentów
+Błąd: za mała liczba operatorów
+= 10
+= 10

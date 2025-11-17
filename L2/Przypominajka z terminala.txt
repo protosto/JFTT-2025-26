@@ -1,0 +1,6 @@
+
+generujemy lex.yy.c -> flex nazwa_pliku.l
+
+kompilacja -> gcc lex.yy.c -o nazwa_pliku
+
+odpalanie przykładu -> Get-Content test1.txt | .\zad1.exe | Set-Content output.txt
