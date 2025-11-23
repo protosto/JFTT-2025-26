@@ -9,9 +9,12 @@ int docs = 0;
 %x IN_COMMENT
 %x IN_DOCS
 
-singleLine          \/\/[^\n]*
-docSingleLine       \/\/(\/|!)[^\n]*
-multilineClose      \*\/
+singleLine               \/\/[^\n]*
+docSingleLine            \/\/(\/|!)[^\n]*
+multilineClose           \*\/
+
+continuedSingleLine      \/\/[^\n]*(\\\n[^\n]*)+
+docContinuedSingleLine   \/\/(\/|!)[^\n]*(\\\n[^\n]*)+
 
 %%
 
@@ -19,8 +22,13 @@ multilineClose      \*\/
 
 \"                            { ECHO; BEGIN(IN_STRING); }
 
-{docSingleLine}               { if (docs) ECHO; }
-{singleLine}                  ;
+
+{docContinuedSingleLine}       { if (docs) ECHO; }
+{docSingleLine}                { if (docs) ECHO; }
+
+{continuedSingleLine}          ;
+{singleLine}                   ;
+
 
 \/\*\*\/                      ;
 
